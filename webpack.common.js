@@ -16,7 +16,7 @@ module.exports = {
     ],
   },
   output: {
-    filename: "[name].bundle.js",
+    filename: "mp4pssh.js",
     path: path.resolve(__dirname, "dist"),
   },
   plugins: [new CleanWebpackPlugin(["dist"])],
