@@ -5,5 +5,8 @@
     "interface-name": false,
     "arrow-parens": false,
     "no-submodule-imports": [true]
+  },
+  "linterOptions": {
+    "exclude": ["node_modules", "dist"]
   }
 }
