@@ -1,0 +1,9 @@
+{
+  "extends": ["tslint:latest", "tslint-config-prettier"],
+  "defaultSeverity": "warning",
+  "rules": {
+    "interface-name": false,
+    "arrow-parens": false,
+    "no-submodule-imports": [true]
+  }
+}
