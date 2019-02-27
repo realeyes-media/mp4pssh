@@ -5,10 +5,10 @@ export class PSSHParser {
   private offset: number = 0;
   private psshBuffer: ArrayBuffer;
 
-  constructor(private base64Pssh: string) {}
+  constructor() {}
 
-  public parsePSSH(): PSSH {
-    this.psshBuffer = base64ToArrayBuffer(this.base64Pssh);
+  public parsePSSH(base64Pssh: string): PSSH {
+    this.psshBuffer = base64ToArrayBuffer(base64Pssh);
 
     const view = new DataView(this.psshBuffer);
 

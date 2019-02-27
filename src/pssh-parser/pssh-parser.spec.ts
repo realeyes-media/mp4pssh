@@ -139,14 +139,14 @@ const expectedData = {
   "132": 6,
 };
 
-const psshParser = new PSSHParser(base64String);
+const psshParser = new PSSHParser();
 
 test("Creates public API", () => {
   expect(psshParser).toHaveProperty("parsePSSH");
 })
 
 test("Parses and creates PSSH object from ArrayBuffer", () => {
-  const pssh = psshParser.parsePSSH();
+  const pssh = psshParser.parsePSSH(base64String);
 
   expect(pssh.version).toBe(1);
   expect(pssh.systemId).toBe("edef8ba979d64acea3c827dcd51d21ed");
