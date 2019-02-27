@@ -8,7 +8,7 @@ test("Converts base64 string to ArrayBuffer", () => {
   expect(arrayBuffer).toBeInstanceOf(ArrayBuffer);
 });
 
-test("Returned ArrayBuffer has length of 185", () => {
+test("Creates ArrayBuffer with correct length", () => {
   const arrayBuffer = base64ToArrayBuffer(base64String);
   expect(arrayBuffer.byteLength).toBe(185);
 });
