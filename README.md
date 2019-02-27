@@ -1,8 +1,8 @@
 # MP4PSSH
 
-A parser to convert a Base64-encoded string representing an MP4 PSSH box into a POJO.
+A parser to convert a Base64-encoded string representing an MP4 PSSH box into a POJO. More information about MP4 PSSH boxes can be found [here](https://w3c.github.io/encrypted-media/format-registry/initdata/cenc.html#common-system).
 
-## Instantiation
+## Installation
 
 This repository is hosted on NPM. Install this package using:
 
@@ -41,6 +41,18 @@ Users can then access the information encoded in the PSSH:
 ## Contributing
 
 This repo is maintained by [RealEyes Media](http://realeyes.com), a Video Streaming consultancy based in Denver, CO, USA. Contributions are welcome via PRs.
+
+### Testing
+
+This repo uses [Jest](https://github.com/facebook/jest) as its testing framework. To test, use:
+
+`npm t`
+
+### Building
+
+This repo uses [Webpack](https://github.com/webpack/webpack) and [Babel](https://github.com/babel/babel) as its build frameworks. To build, use:
+
+`npm run build`
 
 ## License
 
