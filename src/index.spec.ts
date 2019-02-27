@@ -1,5 +1,7 @@
-import sum from "./index";
+import { PSSHParser } from "./index";
 
-test("adds 1 + 2 to equal 3", () => {
-  expect(sum(1, 2)).toBe(3);
+test("Exports PSSHParser", () => {
+  const psshParser = new PSSHParser("");
+
+  expect(psshParser).toBeInstanceOf(PSSHParser);
 });
