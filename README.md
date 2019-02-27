@@ -1,22 +1,16 @@
 # MP4PSSH
 
-A parser to convert a Base64-encoded Widevine Key represnting an MP4 PSSH box into a Javascript object.
+A parser to convert a Base64-encoded string representing an MP4 PSSH box into a POJO.
+
+## Instantiation
+
+This repository is hosted on NPM. Install this package using:
+
+`npm i @re/mp4pssh`
 
 ## Usage
 
-Begin by parsing a manifest to extract the Widevine Key. Given a manifest like:
-
-<pre>
-#EXTM3U
-#EXT-X-VERSION:6
-#EXT-X-TARGETDURATION:4
-#EXT-X-KEY:METHOD=SAMPLE-AES,
-    KEYFORMAT="<KEY_FORMAT>",
-    KEYFORMATVERSIONS="1",
-    URI="data:text/plain;base64,<b>BASE64_KEY</b>"
-</pre>
-
-parse out the **BASE64_KEY**.
+Begin by getting a Base64-encoded string representing an MP4 PSSH box.
 
 ### Instantiation
 
@@ -26,9 +20,9 @@ Create a new instance of the `PSSHParser` class:
 
 ### Parsing the PSSH
 
-Use the `parsePSSH()` method to parse the `BASE64_KEY` into a POJO:
+Use the `parsePSSH()` method to parse the Base64-encoded PSSH box into a POJO:
 
-`const pssh = psshParser.parsePSSH(BASE64_KEY);`
+`const pssh = psshParser.parsePSSH(<BASE64_PSSH>);`
 
 Users can then access the information encoded in the PSSH:
 
