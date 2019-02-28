@@ -7,8 +7,10 @@ before_script:
 script:
   - npm run build
 before_deploy:
+  - git add -A
+  - git commit -m 'Update package lock'
   - npm version $VERSION_BUMP_TYPE -m "Bumping to %s"
-  - git push --tags
+  - git push origin master --tags
   - npm pack
 deploy:
   provider: npm
