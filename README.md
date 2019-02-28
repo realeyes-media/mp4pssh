@@ -30,17 +30,17 @@ Use the `parsePSSH()` method to parse the Base64-encoded PSSH box into a POJO:
 
 Users can then access the information encoded in the PSSH:
 
-  * `version <number>`: The version of the parsed PSSH
+-   `version <number>`: The version of the parsed PSSH
 
-  * `systemId <string>`: The ID of the system that will consume the PSSH data
+-   `systemId <string>`: The ID of the system that will consume the PSSH data
 
-  * `kidCount <number>`: The number of KIDs included in the PSSH
+-   `kidCount <number>`: The number of KIDs included in the PSSH
 
-  * `kids <string[]>`: The KIDs included in the PSSH
+-   `kids <string[]>`: The KIDs included in the PSSH
 
-  * `dataSize <number>`: The length of ths PSSH data (in bytes)
+-   `dataSize <number>`: The length of ths PSSH data (in bytes)
 
-  * `data <Uint8Array>`: The PSSH data
+-   `data <Uint8Array>`: The PSSH data
 
 ## Contributing
 
@@ -56,9 +56,8 @@ This repo uses [Jest](https://github.com/facebook/jest) as its testing framework
 
 This repo uses [Webpack](https://github.com/webpack/webpack) and [Babel](https://github.com/babel/babel) as its build frameworks. To build, use:
 
-`npm run build`
+`npm run bundle`
 
 ## License
 
 MIT
-
