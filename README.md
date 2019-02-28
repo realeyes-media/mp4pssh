@@ -56,7 +56,7 @@ This repo uses [Jest](https://github.com/facebook/jest) as its testing framework
 
 This repo uses [Webpack](https://github.com/webpack/webpack) and [Babel](https://github.com/babel/babel) as its build frameworks. To build, use:
 
-`npm run bundle`
+`npm run build`
 
 ## License
 
