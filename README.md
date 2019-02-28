@@ -1,5 +1,7 @@
 # MP4PSSH
 
+[![Build Status](https://travis-ci.org/realeyes-media/mp4pssh.svg?branch=master)](https://travis-ci.org/realeyes-media/mp4pssh)
+
 A TypeScript parser to convert a Base64-encoded string representing an MP4 PSSH box into a POJO. More information about MP4 PSSH boxes can be found [here](https://w3c.github.io/encrypted-media/format-registry/initdata/cenc.html#common-system).
 
 ## Installation

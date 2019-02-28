@@ -2,5 +2,13 @@ tsconfig.json
 .travis.yml
 src/
 .npmignore
+webpack.*.js
+tslint.json
+.prettierrc
+.babelrc
+.gitignore
+.editorconfig
+jest.config.js
+node_modules/
 // npm pack
 mp4pssh-*.tgz
