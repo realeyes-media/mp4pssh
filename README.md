@@ -46,7 +46,7 @@ Users can then access the information encoded in the PSSH:
 
 ## Contributing
 
-This repo is was written by [Matthew Thompson](https://github.com/realeyes-matthew) and is maintained by [RealEyes Media](http://realeyes.com), a Video Streaming consultancy based in Denver, CO, USA. Contributions are welcome via PRs.
+This repo was written by [Matthew Thompson](https://github.com/realeyes-matthew) and is maintained by [RealEyes Media](http://realeyes.com), a Video Streaming consultancy based in Denver, CO, USA. Contributions are welcome via PRs.
 
 ### Testing
 
