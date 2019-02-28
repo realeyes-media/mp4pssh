@@ -1,5 +1,5 @@
 {
-  "name": "mp4pssh",
+  "name": "@re/mp4pssh",
   "version": "0.0.1",
   "description": "mp4 pssh parser",
   "main": "./dist/mp4pssh.js",
@@ -21,7 +21,11 @@
   "keywords": [
     "pssh"
   ],
-  "author": "John G. Gainfort, Jr. <john@realeyes.com>",
+  "author": "RealEyes Media <support@realeyes.com>",
+  "contributors": [
+    "Matthew Thompson <matthew@realeyes.com>",
+    "John G. Gainfort, Jr. <john@realeyes.com>"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/realeyes-media/mp4pssh/issues"
