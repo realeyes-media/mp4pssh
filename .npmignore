@@ -1,0 +1,6 @@
+tsconfig.json
+.travis.yml
+src/
+.npmignore
+// npm pack
+mp4pssh-*.tgz
