@@ -7,8 +7,13 @@ before_script:
 script:
   - npm run build
 after_success:
-  - npm version $VERSION_BUMP_TYPE -m "Bumping to %s"
-  - git push --tags
+  - git config --local user.name "travis"
+  - git config --local user.email "github@realeyes.com"
+  - export VERSION=`npm version $(echo $VERSION_BUMP_TYPE)`
+  - git add -A
+  - git commit -m 'Version bump'
+  - git tag $VERSION
+  - git push origin master && git push --tags
   - npm pack
 deploy:
   provider: npm
