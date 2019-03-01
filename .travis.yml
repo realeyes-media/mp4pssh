@@ -15,7 +15,6 @@ before_deploy:
   # - git commit -m 'Update package lock [skip ci]'
   # - npm version $VERSION_BUMP_TYPE -m "Bumping to %s"
   # - git push origin HEAD:master --tags
-  - npm pack
 deploy:
   provider: npm
   email: matthew@realeyes.com
@@ -23,3 +22,4 @@ deploy:
     secure: $NPM_API_TOKEN
   on:
     branch: master
+    repo: '@re/mp4pssh'
