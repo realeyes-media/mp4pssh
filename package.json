@@ -4,6 +4,7 @@
   "description": "mp4 pssh parser",
   "main": "./dist/mp4pssh.js",
   "types": "./dist/types/index.d.ts",
+  "author": "RealEyes Media <info@realeyes.com>",
   "scripts": {
     "build": "npm run build:js && npm run build:types",
     "build:js": "webpack --config webpack.prod.js",
@@ -21,7 +22,6 @@
   "keywords": [
     "pssh"
   ],
-  "author": "RealEyes Media <support@realeyes.com>",
   "contributors": [
     "Matthew Thompson <matthew@realeyes.com>",
     "John G. Gainfort, Jr. <john@realeyes.com>"
