@@ -1,6 +1,6 @@
 {
   "name": "@re/mp4pssh",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "mp4 pssh parser",
   "main": "./dist/mp4pssh.js",
   "types": "./dist/types/index.d.ts",
