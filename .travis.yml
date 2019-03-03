@@ -7,18 +7,17 @@ before_script:
 script:
   - npm run build
 before_deploy:
-  # - git config --global user.email github@realeyes.com
-  # - git config --global user.name "Travis"
-  # - git config --global credential.helper 'store --file .git/credentials'
-  # - echo "https://${GITHUB_API_KEY}:@github.com" > .git/credentials
-  # - git add -A
-  # - git commit -m 'Update package lock [skip ci]'
-  # - npm version $VERSION_BUMP_TYPE -m "Bumping to %s"
-  # - git push origin HEAD:master --tags
+  - git config --global user.email github@realeyes.com
+  - git config --global user.name "Travis"
+  - git add -A
+  - git commit -m 'Update package lock [skip ci]'
+  - npm version $VERSION_BUMP_TYPE -m "Bumping to %s"
+  - git push origin HEAD:master --tags
 deploy:
   provider: npm
   email: matthew@realeyes.com
   api_key:
     secure: $NPM_API_TOKEN
   on:
+    tags: true
     branch: master
