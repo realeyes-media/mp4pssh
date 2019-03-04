@@ -18,6 +18,8 @@ module.exports = {
   output: {
     filename: "mp4pssh.js",
     path: path.resolve(__dirname, "dist"),
+    library: "mp4pssh",
+    libraryTarget: "umd"
   },
   plugins: [new CleanWebpackPlugin(["dist"])],
   resolve: {

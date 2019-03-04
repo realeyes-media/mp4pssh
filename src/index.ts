@@ -1,1 +1,1 @@
-export { PSSHParser } from './pssh-parser/pssh-parser';
+export * from './pssh-parser/pssh-parser';
