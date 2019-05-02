@@ -1,5 +1,6 @@
 import { PSSH } from "../models/pssh.model";
 import { base64ToArrayBuffer } from "../utils/base64";
+import { SystemIds } from "../consts/system-ids.const";
 
 export class PSSHParser {
   private offset: number = 0;
@@ -18,9 +19,15 @@ export class PSSHParser {
 
     const systemId: string = this.parseSystemId(view);
 
-    const kidCount: number = this.parseKidCount(view);
+    let kidCount: number | undefined = undefined;
 
-    const kids: string[] = this.parseKids(view, kidCount);
+    let kids: string[] | undefined = undefined;
+
+    if (systemId === SystemIds.WIDEVINE) {
+      kidCount = this.parseKidCount(view);
+
+      kids = this.parseKids(view, kidCount);
+    }
 
     const dataSize: number = this.parseDataSize(view);
 
