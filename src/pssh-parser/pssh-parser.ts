@@ -1,109 +1,114 @@
-import { PSSH } from "../models/pssh.model";
-import { base64ToArrayBuffer } from "../utils/base64";
 import { SystemIds } from "../consts/system-ids.const";
+import { SystemNames } from "../enums/system-names.enum";
+import { PSSH, PSSHKeyData } from "../models/pssh.model";
+import { base64ToArrayBuffer } from "../utils/base64";
 
 export class PSSHParser {
-  private offset: number = 0;
-  private psshBuffer: ArrayBuffer;
-
   constructor() {}
 
   public parsePSSH(base64Pssh: string): PSSH {
-    this.psshBuffer = base64ToArrayBuffer(base64Pssh);
+    const psshBuffer = base64ToArrayBuffer(base64Pssh);
 
-    const view = new DataView(this.psshBuffer);
+    const view = new DataView(psshBuffer);
 
-    this.offset += 8; // Box size and type length (unused)
+    let offset = 8; // Box size and type length (unused)
 
-    const version: number = this.parseVersion(view);
+    const version = this.parseUint8(view, offset);
 
-    const systemId: string = this.parseSystemId(view);
+    offset += 4; // Version length
 
-    let kidCount: number | undefined = undefined;
+    const systemId = this.parseString(view, offset);
 
-    let kids: string[] | undefined = undefined;
+    offset += 16; // SystemId length
 
-    if (systemId === SystemIds.WIDEVINE) {
-      kidCount = this.parseKidCount(view);
+    let system: SystemNames = SystemNames.WIDEVINE_V0;
+    let keyData: PSSHKeyData | undefined = undefined;
 
-      kids = this.parseKids(view, kidCount);
+    switch (systemId) {
+      case SystemIds[SystemNames.WIDEVINE_V0]:
+        system = SystemNames.WIDEVINE_V0;
+
+        break;
+
+      case SystemIds[SystemNames.WIDEVINE_V1]:
+        system = SystemNames.WIDEVINE_V1;
+
+        const v1KeyData = this.parseWidevineV1KeyData(view, offset);
+
+        offset += 4 + 16 * v1KeyData.kidCount;
+
+        keyData = v1KeyData;
+
+        break;
+
+      case SystemIds[SystemNames.PLAYREADY]:
+        system = SystemNames.PLAYREADY;
+
+        break;
     }
 
-    const dataSize: number = this.parseDataSize(view);
+    const dataSize = this.parseUint32(view, offset);
 
-    const data: Uint8Array = this.parseData();
+    offset += 4; // Data size length
+
+    const data = this.parseUint8Array(psshBuffer, offset);
 
     return {
       data,
       dataSize,
-      kidCount,
-      kids,
       systemId,
+      system,
       version,
+      keyData,
     };
   }
 
-  private parseVersion(view: DataView): number {
-    const version = view.getUint8(this.offset);
-
-    this.offset += 4; // Version length
-
-    return version;
+  private parseUint8(view: DataView, offset: number): number {
+    return view.getUint8(offset);
   }
 
-  private parseSystemId(view: DataView): string {
-    let systemId = "";
+  private parseUint32(view: DataView, offset: number): number {
+    return view.getUint32(offset);
+  }
+
+  private parseUint8Array(buffer: ArrayBuffer, offset: number): Uint8Array {
+    const dataArray = buffer.slice(offset);
+
+    return new Uint8Array(dataArray);
+  }
+
+  private parseString(view: DataView, offset: number): string {
+    let result = "";
 
     for (let i = 0; i < 16; i++) {
-      const hex = view.getUint8(i + this.offset).toString(16);
+      const hex = view.getUint8(i + offset).toString(16);
 
-      systemId += hex.length === 1 ? "0" + hex : hex;
+      result += hex.length === 1 ? "0" + hex : hex;
     }
 
-    this.offset += 16; // SystemId length
-
-    return systemId;
+    return result;
   }
 
-  private parseKidCount(view: DataView): number {
-    const kidCount = view.getUint32(this.offset);
+  // Format-specific parsers
 
-    this.offset += 4; // KID count length
+  private parseWidevineV1KeyData(view: DataView, offset: number): PSSHKeyData {
+    let kidCount = this.parseUint32(view, offset);
 
-    return kidCount;
-  }
+    let kidOffset = offset + 4; // KID count length
 
-  private parseKids(view: DataView, kidCount: number): string[] {
-    const kids: string[] = [];
+    let kids: string[] = [];
 
     for (let i = 0; i < kidCount; i++) {
-      let kid = "";
-
-      for (let j = 0; j < 16; j++) {
-        const hex = view.getUint8(j + this.offset).toString(16);
-
-        kid += hex.length === 1 ? "0" + hex : hex;
-      }
+      let kid = this.parseString(view, kidOffset);
 
       kids.push(kid);
 
-      this.offset += 16; // KID length
+      kidOffset += 16; // KID length
     }
 
-    return kids;
-  }
-
-  private parseDataSize(view: DataView): number {
-    const dataSize = view.getUint32(this.offset);
-
-    this.offset += 4; // Data size length
-
-    return dataSize;
-  }
-
-  private parseData(): Uint8Array {
-    const dataArray: ArrayBuffer = this.psshBuffer.slice(this.offset);
-
-    return new Uint8Array(dataArray);
+    return {
+      kidCount,
+      kids,
+    };
   }
 }

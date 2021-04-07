@@ -1,0 +1,5 @@
+export enum SystemNames {
+  WIDEVINE_V0 = "WIDEVINE_V0",
+  WIDEVINE_V1 = "WIDEVINE_V1",
+  PLAYREADY = "PLAYREADY",
+}

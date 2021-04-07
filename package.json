@@ -1,8 +1,8 @@
 {
   "name": "@re/mp4pssh",
-  "version": "0.0.2",
+  "version": "2.0.0",
   "description": "TypeScript MP4 PSSH Parser",
-  "main": "./dist/mp4pssh.js",
+  "main": "./src/index.ts",
   "types": "./dist/types/index.d.ts",
   "author": "RealEyes Media <info@realeyes.com>",
   "scripts": {
