@@ -21,29 +21,21 @@ export class PSSHParser {
 
     offset += 16; // SystemId length
 
-    let system: SystemNames = SystemNames.WIDEVINE_V0;
     let keyData: PSSHKeyData | undefined = undefined;
 
     switch (systemId) {
-      case SystemIds[SystemNames.WIDEVINE_V0]:
-        system = SystemNames.WIDEVINE_V0;
+      case SystemIds[SystemNames.WIDEVINE]:
+        if (version === 1) {
+          const v1KeyData = this.parseWidevineV1KeyData(view, offset);
 
-        break;
+          offset += 4 + 16 * v1KeyData.kidCount;
 
-      case SystemIds[SystemNames.WIDEVINE_V1]:
-        system = SystemNames.WIDEVINE_V1;
-
-        const v1KeyData = this.parseWidevineV1KeyData(view, offset);
-
-        offset += 4 + 16 * v1KeyData.kidCount;
-
-        keyData = v1KeyData;
+          keyData = v1KeyData;
+        }
 
         break;
 
       case SystemIds[SystemNames.PLAYREADY]:
-        system = SystemNames.PLAYREADY;
-
         break;
     }
 
@@ -57,7 +49,6 @@ export class PSSHParser {
       data,
       dataSize,
       systemId,
-      system,
       version,
       keyData,
     };
